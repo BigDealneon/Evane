@@ -1,0 +1,1 @@
+_N_E=(window.webpackJsonp_N_E=window.webpackJsonp_N_E||[]).push([[35],{Ns9M:function(e,n,o){(window.__NEXT_P=window.__NEXT_P||[]).push(["/PreviewPage/MobileMenuv2",function(){return o("5vG9")}])},Qetd:function(e,n,o){"use strict";var s=Object.assign.bind(Object);e.exports=s,e.exports.default=e.exports}},[["Ns9M",0,1,5]]]);
