@@ -617,6 +617,7 @@ main {
   z-index: 1;
   max-width: 780px;
   margin: 0 auto;
+  padding-right: 280px;
 }
 
 .rl__title {
@@ -629,13 +630,62 @@ main {
   margin: 0 0 20px;
 }
 
-.rl__text {
+.rl__quote {
+  position: relative;
+  max-width: 430px;
+  margin: 0;
+  padding: 18px 0 0 28px;
+  text-align: left;
+}
+
+.rl__quote::before {
+  content: "“";
+  position: absolute;
+  top: -6px;
+  left: 0;
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--gold);
+}
+
+.rl__quote p {
   font-family: var(--font);
   font-size: clamp(1rem, 1.3vw, 1.1rem);
   line-height: 1.75;
   color: var(--text-muted);
   margin: 0;
   font-weight: 400;
+  font-style: italic;
+}
+
+.rl__quote-author {
+  display: block;
+  margin-top: 12px;
+  font-family: var(--font);
+  font-size: 0.78rem;
+  font-weight: 600;
+  font-style: normal;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.rl__portrait {
+  position: absolute;
+  right: 0;
+  bottom: -40px;
+  width: clamp(200px, 25vw, 280px);
+  pointer-events: none;
+}
+
+.rl__elizabeth-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 20px;
+  box-shadow: 0 24px 60px -36px rgba(0, 0, 0, 0.85);
 }
 
 /* =========================================================================
@@ -875,7 +925,21 @@ main {
   .vb__sound-pill svg { width: 16px; height: 16px; }
 
   .rl          { padding: 40px 0 20px; }
-  .rl__text    { line-height: 1.65; }
+  .rl__inner   { padding-right: 24px; }
+  .rl__quote   { max-width: none; padding: 16px 0 0 24px; }
+  .rl__quote::before { top: -4px; font-size: 2.5rem; }
+  .rl__quote p { line-height: 1.65; }
+  .rl__portrait {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    width: min(240px, 68vw);
+    margin: 20px auto 0;
+  }
+  .rl__elizabeth-img {
+    border-radius: 18px;
+    box-shadow: 0 18px 40px -28px rgba(0, 0, 0, 0.78);
+  }
 
   .cta-band    { padding: 36px 0 64px; }
   .cta-band__title { margin: 0 auto 20px; max-width: 460px; }
@@ -898,6 +962,8 @@ main {
   .vb__frame iframe,
   .vb__overlay { border-radius: 12px; }
   .rl       { padding: 28px 0 12px; }
+  .rl__quote { padding-left: 22px; }
+  .rl__portrait { width: min(210px, 72vw); margin-top: 18px; }
   .cta-band { padding: 24px 0 48px; }
 }
 
@@ -1037,55 +1103,4 @@ main {
   .simple-page__lead  { margin-bottom: 24px; }
   .simple-page__step  { padding: 16px 18px; }
   .error-hero         { padding: 72px 0; }
-}
-
-/* =========================================================================
- * Elizabeth backdrop — ONE shared image-layer that spans the Reality +
- * CTA pair. Lives inside a single .ed-band wrapper that sits in
- * pages/index.js between <VideoBlock /> and <LandingFooter />. The two
- * sections inside (.rl and .cta-band) keep all of their own padding,
- * spacing and typography untouched; the wrapper only adds positioning.
- * ========================================================================= */
-
-.ed-band {
-  position: relative;
-  overflow: hidden;
-  /* No padding / max-width / display so the wrapper does not affect the
-   * size or rhythm of .rl or .cta-band — the two sections behave
-   * exactly as if they were direct children of <main>. */
-}
-
-.ed-portrait {
-  position: absolute;
-  inset: 0 auto 0 0;            /* desktop: pinned to the LEFT, full wrapper height */
-  z-index: 0;
-  pointer-events: none;
-  user-select: none;
-  -webkit-user-select: none;
-  width: clamp(320px, 36%, 520px);
-  height: 100%;
-  object-fit: cover;
-  object-position: center 30%;
-  opacity: 0.5;
-  /* Soft elliptical edge fade so hands / shoulders / top / bottom of
-   * the figure dissolve into the dark page gradient instead of ending
-   * in a hard rectangle. */
-  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 30%, transparent 78%);
-          mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 30%, transparent 78%);
-}
-
-/* Mobile: same single image becomes a centered, full-width backdrop
- * spanning both sections. The figure stays centered via
- * object-position; mask keeps edges blended; width: 100% (not 100vw)
- * so no horizontal scroll is introduced. */
-@media (max-width: 767px) {
-  .ed-portrait {
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-position: center;
-    opacity: 0.3;
-    -webkit-mask-image: radial-gradient(ellipse 70% 75% at 50% 50%, #000 22%, transparent 78%);
-            mask-image: radial-gradient(ellipse 70% 75% at 50% 50%, #000 22%, transparent 78%);
-  }
 }
