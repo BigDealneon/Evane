@@ -1,5 +1,41 @@
 /* Minimal CSS reset for the trading landing. */
 
+/* Font fallback to reduce CLS while Inter loads */
+@font-face {
+  font-family: Inter;
+  src: local(-apple-system), local(system-ui), local('Segoe UI'), local(Roboto);
+  font-display: swap;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: Inter;
+  src: local(-apple-system), local(system-ui), local('Segoe UI'), local(Roboto);
+  font-display: swap;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: Inter;
+  src: local(-apple-system), local(system-ui), local('Segoe UI'), local(Roboto);
+  font-display: swap;
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: Inter;
+  src: local(-apple-system), local(system-ui), local('Segoe UI'), local(Roboto);
+  font-display: swap;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: Inter;
+  src: local(-apple-system), local(system-ui), local('Segoe UI'), local(Roboto);
+  font-display: swap;
+  font-weight: 800;
+}
+
 *,
 *::before,
 *::after {

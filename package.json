@@ -8,7 +8,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "analyze": "ANALYZE=true next build",
+    "lint": "next lint"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
@@ -45,5 +47,8 @@
     "sass": "^1.77.0",
     "slick-carousel": "^1.8.1",
     "swiper": "^5.0.4"
+  },
+  "devDependencies": {
+    "@next/bundle-analyzer": "^12.3.4"
   }
 }

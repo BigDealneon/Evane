@@ -1,14 +1,12 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 // Decorative trading-chart backdrop. Pure SVG, layered absolutely behind
 // the headline text — it never affects layout, never receives clicks, and
 // never reflows. Tuned so the right side reads as a calm bullish chart
 // while the left side fades out so the centered headline stays clean.
 function HeroChart() {
-  // Each candle: x position (px in viewBox), open / close / high / low (y).
-  // Spread across the full 0–800 viewBox width so the chart reads as a
-  // continuous market backdrop, not a corner accent.
-  const candles = [
+  // Memoize candle data to avoid recalculation on every render
+  const candles = useMemo(() => [
     { x: 20,  o: 240, c: 248, h: 235, l: 252 },
     { x: 50,  o: 248, c: 234, h: 230, l: 252 },
     { x: 80,  o: 234, c: 240, h: 230, l: 244 },
@@ -35,16 +33,32 @@ function HeroChart() {
     { x: 710, o: 152, c: 134, h: 128, l: 156 },
     { x: 740, o: 134, c: 140, h: 128, l: 144 },
     { x: 770, o: 140, c: 122, h: 116, l: 146 },
-  ];
+  ], []);
 
-  const trendPoints = candles
-    .map((c) => `${c.x},${(c.o + c.c) / 2}`)
-    .join(' ');
+  const trendPoints = useMemo(() => 
+    candles
+      .map((c) => `${c.x},${(c.o + c.c) / 2}`)
+      .join(' '),
+    [candles]
+  );
+
+  // Pre-generate grid lines to avoid Array.from() on every render
+  const horizontalGridLines = useMemo(() => 
+    Array.from({ length: 7 }).map((_, i) => i),
+    []
+  );
+
+  const verticalGridLines = useMemo(() => 
+    Array.from({ length: 13 }).map((_, i) => i),
+    []
+  );
 
   return (
     <svg
       className="hd-chart"
       viewBox="0 0 800 300"
+      width="800"
+      height="300"
       preserveAspectRatio="xMidYMid slice"
       aria-hidden="true"
       focusable="false"
@@ -57,7 +71,7 @@ function HeroChart() {
       </defs>
 
       {/* horizontal grid */}
-      {Array.from({ length: 7 }).map((_, i) => (
+      {horizontalGridLines.map((i) => (
         <line
           key={`h${i}`}
           x1="0"
@@ -70,7 +84,7 @@ function HeroChart() {
       ))}
 
       {/* vertical grid */}
-      {Array.from({ length: 13 }).map((_, i) => (
+      {verticalGridLines.map((i) => (
         <line
           key={`v${i}`}
           x1={20 + i * 60}

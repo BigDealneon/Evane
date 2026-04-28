@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Headline from '../components/landing/Headline';
-import VideoBlock from '../components/landing/VideoBlock';
 import Reality from '../components/landing/Reality';
 import CtaBand from '../components/landing/CtaBand';
 import LandingFooter from '../components/landing/LandingFooter';
@@ -13,6 +13,15 @@ import {
   OG_IMAGE,
   canonicalFor,
 } from '../lib/seo';
+
+// Lazy load VideoBlock to defer Wistia script loading and reduce main thread work
+const VideoBlock = dynamic(
+  () => import('../components/landing/VideoBlock'),
+  { 
+    ssr: true,
+    loading: () => <div className="vb" style={{ minHeight: '400px', background: 'rgba(0,0,0,0.02)' }} />
+  }
+);
 
 const canonical = canonicalFor('/');
 

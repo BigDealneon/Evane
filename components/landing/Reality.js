@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 export default function Reality() {
   return (
@@ -13,7 +14,15 @@ export default function Reality() {
           <footer className="rl__quote-author">Elizabeth</footer>
         </blockquote>
         <div className="rl__portrait" aria-hidden="true">
-          <img src="/images/portrait.webp" alt="" className="rl__elizabeth-img" />
+          <Image
+            src="/images/portrait.webp"
+            alt=""
+            width={280}
+            height={373}
+            quality={75}
+            priority={false}
+            className="rl__elizabeth-img"
+          />
         </div>
       </div>
     </section>

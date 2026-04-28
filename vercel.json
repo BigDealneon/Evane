@@ -1,1 +1,13 @@
-{"build": {"env": {"NODE_VERSION": "16"}}}
+{
+  "build": {
+    "env": {
+      "NODE_VERSION": "18",
+      "NEXT_TELEMETRY_DISABLED": "1"
+    }
+  },
+  "buildCommand": "next build",
+  "outputDirectory": ".next",
+  "env": {
+    "NEXT_TELEMETRY_DISABLED": "1"
+  }
+}
